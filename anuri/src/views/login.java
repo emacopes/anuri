@@ -17,12 +17,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import java.awt.Frame;
+import javax.swing.JPasswordField;
 
 public class login {
 
 	private JFrame frmLogin;
 	private JTextField textField;
-	private JTextField textField_1;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -53,45 +57,46 @@ public class login {
 	private void initialize() {
 		frmLogin = new JFrame();
 		frmLogin.setTitle("Login");
-		frmLogin.setType(Type.POPUP);
+		frmLogin.setType(Type.UTILITY);
 		frmLogin.setResizable(false);
-		frmLogin.setBounds(100, 100, 358, 249);
-		frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmLogin.setBounds(100, 100, 349, 195);
+		frmLogin.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frmLogin.getContentPane().setLayout(null);
 		
 		JButton btnNewButton = new JButton("Aceptar");
+		btnNewButton.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		btnNewButton.setFont(new Font("Century", Font.PLAIN, 16));
-		btnNewButton.setBounds(50, 174, 99, 23);
+		btnNewButton.setBounds(40, 117, 99, 35);
 		frmLogin.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Cancelar");
+		btnNewButton_1.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmLogin.dispose();
 			}
 		});
 		btnNewButton_1.setFont(new Font("Century", Font.PLAIN, 16));
-		btnNewButton_1.setBounds(197, 174, 99, 23);
+		btnNewButton_1.setBounds(197, 117, 99, 35);
 		frmLogin.getContentPane().add(btnNewButton_1);
 		
 		textField = new JTextField();
-		textField.setBounds(153, 41, 155, 20);
+		textField.setBounds(141, 20, 155, 20);
 		frmLogin.getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(153, 94, 155, 20);
-		frmLogin.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
-		
 		JLabel lblUsuario = new JLabel("Usuario");
 		lblUsuario.setFont(new Font("Century", Font.PLAIN, 16));
-		lblUsuario.setBounds(22, 42, 83, 14);
+		lblUsuario.setBounds(22, 21, 83, 14);
 		frmLogin.getContentPane().add(lblUsuario);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
 		lblContrasea.setFont(new Font("Century", Font.PLAIN, 16));
-		lblContrasea.setBounds(22, 95, 127, 14);
+		lblContrasea.setBounds(22, 59, 127, 14);
 		frmLogin.getContentPane().add(lblContrasea);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(141, 58, 155, 20);
+		frmLogin.getContentPane().add(passwordField);
 	}
 }
