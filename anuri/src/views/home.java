@@ -12,6 +12,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import views.*;
 import java.awt.Frame;
+import javax.swing.JList;
+import java.awt.BorderLayout;
+import javax.swing.JRadioButtonMenuItem;
+import java.awt.Choice;
 
 public class home {
 
@@ -87,6 +91,28 @@ public class home {
 		
 		mntmCerrarSesion.setEnabled(false);
 		mntmCambiarContrasea.setEnabled(false);
+		
+		JMenu mnMateriales = new JMenu("Materiales");
+		menuBar.add(mnMateriales);
+		
+		JMenuItem mntmEntrada = new JMenuItem("Entrada");
+		mnMateriales.add(mntmEntrada);
+		
+		JMenuItem mntmDespiece = new JMenuItem("Despiece");
+		mnMateriales.add(mntmDespiece);
+		
+		JMenuItem mntmSolicitud = new JMenuItem("Solicitud");
+		mnMateriales.add(mntmSolicitud);
+		
+		JMenu mnAdministrarMateriales = new JMenu("Administrar Materiales");
+		mnMateriales.add(mnAdministrarMateriales);
+		
+		JMenuItem mntmNuevo_1 = new JMenuItem("Nuevo");
+		mnAdministrarMateriales.add(mntmNuevo_1);
+		
+		JMenuItem mntmModificar_1 = new JMenuItem("Modificar");
+		mnAdministrarMateriales.add(mntmModificar_1);
+		frmAuriHispanoamericanaSa.getContentPane().setLayout(null);
 		//mnAdministrarUsuarios.setVisible(false);
 	}	
 }
