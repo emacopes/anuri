@@ -3,11 +3,15 @@ package views;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.JButton;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JCheckBoxMenuItem;
 
 public class home {
 
-	private JFrame frame;
-
+	private JFrame frmAuriHispanoamericanaSa;
 	/**
 	 * Launch the application.
 	 */
@@ -16,7 +20,7 @@ public class home {
 			public void run() {
 				try {
 					home window = new home();
-					window.frame.setVisible(true);
+					window.frmAuriHispanoamericanaSa.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -35,9 +39,27 @@ public class home {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAuriHispanoamericanaSa = new JFrame();
+		frmAuriHispanoamericanaSa.setTitle("A\u00F1uri Hispanoamericana S.A.");
+		frmAuriHispanoamericanaSa.setBounds(100, 100, 450, 300);
+		frmAuriHispanoamericanaSa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JMenuBar menuBar = new JMenuBar();
+		frmAuriHispanoamericanaSa.setJMenuBar(menuBar);
+		
+		JMenu mnUsuario = new JMenu("Usuario");
+		menuBar.add(mnUsuario);
+		
+		JMenuItem mntmIniciarSesion = new JMenuItem("Iniciar Sesi\u00F3n");
+		mnUsuario.add(mntmIniciarSesion);
+		
+		JMenuItem mntmCerrarSesion = new JMenuItem("Cerrar Sesi\u00F3n");
+		mnUsuario.add(mntmCerrarSesion);
+		
+		JMenuItem mntmCambiarContrasea = new JMenuItem("Cambiar Contrase\u00F1a");
+		mnUsuario.add(mntmCambiarContrasea);
+		
+		JMenuItem mntmAdministrarUsuarios = new JMenuItem("Administrar Usuarios");
+		mnUsuario.add(mntmAdministrarUsuarios);
 	}
-
 }
