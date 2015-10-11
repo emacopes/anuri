@@ -14,7 +14,7 @@ import views.*;
 
 public class home {
 
-	private JFrame frmAuriHispanoamericanaSa;
+  static JFrame frmAuriHispanoamericanaSa;
 	/**
 	 * Launch the application.
 	 */
