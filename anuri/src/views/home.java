@@ -11,7 +11,7 @@ import javax.swing.JCheckBoxMenuItem;
 
 public class home {
 
-	private JFrame frame;
+	private JFrame frmAuriHispanoamericanaSa;
 	/**
 	 * Launch the application.
 	 */
@@ -20,7 +20,7 @@ public class home {
 			public void run() {
 				try {
 					home window = new home();
-					window.frame.setVisible(true);
+					window.frmAuriHispanoamericanaSa.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -39,12 +39,13 @@ public class home {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAuriHispanoamericanaSa = new JFrame();
+		frmAuriHispanoamericanaSa.setTitle("A\u00F1uri Hispanoamericana S.A.");
+		frmAuriHispanoamericanaSa.setBounds(100, 100, 450, 300);
+		frmAuriHispanoamericanaSa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
+		frmAuriHispanoamericanaSa.setJMenuBar(menuBar);
 		
 		JMenu mnUsuario = new JMenu("Usuario");
 		menuBar.add(mnUsuario);
