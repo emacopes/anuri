@@ -11,6 +11,7 @@ import javax.swing.JCheckBoxMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import views.*;
+import java.awt.Frame;
 
 public class home {
 
@@ -43,6 +44,7 @@ public class home {
 	 */
 	private void initialize() {
 		frmAuriHispanoamericanaSa = new JFrame();
+		frmAuriHispanoamericanaSa.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmAuriHispanoamericanaSa.setTitle("A\u00F1uri Hispanoamericana S.A.");
 		frmAuriHispanoamericanaSa.setBounds(100, 100, 450, 300);
 		frmAuriHispanoamericanaSa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,8 +70,23 @@ public class home {
 		
 		JMenuItem mntmCambiarContrasea = new JMenuItem("Cambiar Contrase\u00F1a");
 		mnUsuario.add(mntmCambiarContrasea);
+			
+		JMenu mnAdministrarUsuarios = new JMenu("Administrar Usuarios");
+		mnUsuario.add(mnAdministrarUsuarios);
 		
-		JMenuItem mntmAdministrarUsuarios = new JMenuItem("Administrar Usuarios");
-		mnUsuario.add(mntmAdministrarUsuarios);
-	}
+		JMenuItem mntmNuevo = new JMenuItem("Nuevo");
+		mnAdministrarUsuarios.add(mntmNuevo);
+		
+		JMenuItem mntmModificar = new JMenuItem("Modificar");
+		mnAdministrarUsuarios.add(mntmModificar);
+		
+		JMenuItem mntmEliminar = new JMenuItem("Eliminar");
+		mnAdministrarUsuarios.add(mntmEliminar);
+		
+		
+		
+		mntmCerrarSesion.setEnabled(false);
+		mntmCambiarContrasea.setEnabled(false);
+		//mnAdministrarUsuarios.setVisible(false);
+	}	
 }
