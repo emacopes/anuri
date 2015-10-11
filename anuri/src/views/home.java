@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 public class home {
 
 	private JFrame frame;
-
 	/**
 	 * Launch the application.
 	 */
