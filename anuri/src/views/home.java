@@ -8,6 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JCheckBoxMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import views.*;
 
 public class home {
 
@@ -51,6 +54,12 @@ public class home {
 		menuBar.add(mnUsuario);
 		
 		JMenuItem mntmIniciarSesion = new JMenuItem("Iniciar Sesi\u00F3n");
+		mntmIniciarSesion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			login log = new login(); 
+			log.frmLogin.setVisible(true);
+			}
+		});
 		mnUsuario.add(mntmIniciarSesion);
 		
 		JMenuItem mntmCerrarSesion = new JMenuItem("Cerrar Sesi\u00F3n");
