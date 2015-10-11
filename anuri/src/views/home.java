@@ -58,6 +58,7 @@ public class home {
 			public void actionPerformed(ActionEvent arg0) {
 			login log = new login(); 
 			log.frmLogin.setVisible(true);
+			frmAuriHispanoamericanaSa.setEnabled(false);
 			}
 		});
 		mnUsuario.add(mntmIniciarSesion);
