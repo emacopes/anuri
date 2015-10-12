@@ -24,6 +24,8 @@ import java.awt.event.WindowFocusListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
 
 public class Home {
   private JDialog actual;
@@ -78,10 +80,10 @@ public class Home {
 		JMenuItem mntmIniciarSesion = new JMenuItem("Iniciar Sesi\u00F3n");
 		mntmIniciarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-		/*	newLogin log = new newLogin();
+			Login log = new Login();
 			log.setVisible(true);
 			actual=log;
-			frmAuriHispanoamericanaSa.setEnabled(false);*/
+			frmAuriHispanoamericanaSa.setEnabled(false);
 			}
 		});
 		mnUsuario.add(mntmIniciarSesion);
@@ -92,8 +94,9 @@ public class Home {
 		JMenuItem mntmCambiarContrasea = new JMenuItem("Cambiar Contrase\u00F1a");
 		mntmCambiarContrasea.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cambiarContraseña cc=new cambiarContraseña();
-				cc.frmCambiarContrasea.setVisible(true);
+				ChangePassword cp=new ChangePassword();
+				cp.setVisible(true);
+				actual=cp;
 				frmAuriHispanoamericanaSa.setEnabled(false);
 			}
 		});
@@ -145,6 +148,7 @@ public class Home {
 		JMenuItem mntmModificar_1 = new JMenuItem("Modificar");
 		mnAdministrarMateriales.add(mntmModificar_1);
 		frmAuriHispanoamericanaSa.getContentPane().setLayout(null);
+		frmAuriHispanoamericanaSa.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{menuBar, mnUsuario, mnMateriales}));
 		//mnAdministrarUsuarios.setVisible(false);
 	}	
 }
