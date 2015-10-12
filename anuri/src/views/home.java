@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import views.*;
@@ -20,9 +22,11 @@ import java.awt.Dimension;
 import javax.swing.JInternalFrame;
 import java.awt.event.WindowFocusListener;
 import java.awt.event.WindowEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class home {
-
+ private JDialog actual;
   static JFrame frmAuriHispanoamericanaSa;
 	/**
 	 * Launch the application.
@@ -52,6 +56,13 @@ public class home {
 	 */
 	private void initialize() {
 		frmAuriHispanoamericanaSa = new JFrame();
+		frmAuriHispanoamericanaSa.addWindowFocusListener(new WindowFocusListener() {
+			public void windowGainedFocus(WindowEvent e) {
+				actual.toFront();
+			}
+			public void windowLostFocus(WindowEvent e) {
+			}
+		});
 		frmAuriHispanoamericanaSa.setMinimumSize(new Dimension(800, 600));
 		frmAuriHispanoamericanaSa.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmAuriHispanoamericanaSa.setTitle("A\u00F1uri Hispanoamericana S.A.");
@@ -67,8 +78,12 @@ public class home {
 		JMenuItem mntmIniciarSesion = new JMenuItem("Iniciar Sesi\u00F3n");
 		mntmIniciarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			login log = new login(); 
-			log.frmLogin.setVisible(true);			
+			//login log = new login(); 
+			//log.frmLogin.setVisible(true);			
+			//frmAuriHispanoamericanaSa.setEnabled(false);
+			newLogin log = new newLogin();
+			log.setVisible(true);
+			actual=log;
 			frmAuriHispanoamericanaSa.setEnabled(false);
 			}
 		});
