@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
+import java.awt.Window.Type;
 
 public class altaUsuario {
 
@@ -53,6 +54,7 @@ public class altaUsuario {
 	 */
 	private void initialize() {
 		frmNuevoUsuario = new JFrame();
+		frmNuevoUsuario.setType(Type.UTILITY);
 		frmNuevoUsuario.setSize(new Dimension(800, 450));
 		frmNuevoUsuario.setResizable(false);
 		frmNuevoUsuario.setTitle("Nuevo Usuario");

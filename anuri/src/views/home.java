@@ -65,7 +65,7 @@ public class home {
 		mntmIniciarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			login log = new login(); 
-			log.frmLogin.setVisible(true);
+			log.frmLogin.setVisible(true);			
 			frmAuriHispanoamericanaSa.setEnabled(false);
 			}
 		});
@@ -75,6 +75,13 @@ public class home {
 		mnUsuario.add(mntmCerrarSesion);
 		
 		JMenuItem mntmCambiarContrasea = new JMenuItem("Cambiar Contrase\u00F1a");
+		mntmCambiarContrasea.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cambiarContraseña cc=new cambiarContraseña();
+				cc.frmCambiarContrasea.setVisible(true);
+				frmAuriHispanoamericanaSa.setEnabled(false);
+			}
+		});
 		mnUsuario.add(mntmCambiarContrasea);
 			
 		JMenu mnAdministrarUsuarios = new JMenu("Administrar Usuarios");
@@ -99,7 +106,7 @@ public class home {
 		
 		
 		mntmCerrarSesion.setEnabled(false);
-		mntmCambiarContrasea.setEnabled(false);
+		//mntmCambiarContrasea.setEnabled(false);
 		
 		JMenu mnMateriales = new JMenu("Materiales");
 		menuBar.add(mnMateriales);
