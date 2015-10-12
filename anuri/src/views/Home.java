@@ -2,8 +2,10 @@ package views;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
+import org.hibernate.Query;
 import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -25,8 +27,11 @@ import java.awt.event.WindowEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
-import java.awt.Component;
+import org.hibernate.Session;
 
+import java.awt.Component;
+import anuri.modelo.*;
+import util.*;
 public class Home {
   private JDialog actual;
   static JFrame frmAuriHispanoamericanaSa;
@@ -52,6 +57,13 @@ public class Home {
 	public Home() {
 		initialize();
 	}
+	private void ListarUsuarios(){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        System.out.println(session.createQuery("select u.nombre from user as u").list());      
+        session.getTransaction().commit();
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -60,7 +72,7 @@ public class Home {
 		frmAuriHispanoamericanaSa = new JFrame();
 		frmAuriHispanoamericanaSa.addWindowFocusListener(new WindowFocusListener() {
 			public void windowGainedFocus(WindowEvent e) {
-				actual.toFront();
+				//actual.toFront();
 			}
 			public void windowLostFocus(WindowEvent e) {
 			}
@@ -76,6 +88,7 @@ public class Home {
 		
 		JMenu mnUsuario = new JMenu("Usuario");
 		menuBar.add(mnUsuario);
+		
 		
 		JMenuItem mntmIniciarSesion = new JMenuItem("Iniciar Sesi\u00F3n");
 		mntmIniciarSesion.addActionListener(new ActionListener() {
@@ -164,6 +177,15 @@ public class Home {
 		JMenuItem mntmModificar_1 = new JMenuItem("Modificar");
 		mnAdministrarMateriales.add(mntmModificar_1);
 		frmAuriHispanoamericanaSa.getContentPane().setLayout(null);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ListarUsuarios();
+			}
+		});
+		btnNewButton.setBounds(131, 183, 89, 23);
+		frmAuriHispanoamericanaSa.getContentPane().add(btnNewButton);
 		//mnAdministrarUsuarios.setVisible(false);
 	}	
 }

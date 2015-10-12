@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-oct-2015 19:44:17 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="anuri.modelo.UserPermiso" table="user_permiso" catalog="anuri">
+        <id name="userPermisoId" type="java.lang.Integer">
+            <column name="user_permiso_id" />
+            <generator class="identity" />
+        </id>
+        <property name="userId" type="int">
+            <column name="user_id" not-null="true" />
+        </property>
+        <property name="permisoId" type="int">
+            <column name="permiso_id" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
