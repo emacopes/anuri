@@ -16,6 +16,7 @@ import javax.swing.JList;
 import java.awt.BorderLayout;
 import javax.swing.JRadioButtonMenuItem;
 import java.awt.Choice;
+import java.awt.Dimension;
 
 public class home {
 
@@ -48,6 +49,7 @@ public class home {
 	 */
 	private void initialize() {
 		frmAuriHispanoamericanaSa = new JFrame();
+		frmAuriHispanoamericanaSa.setMinimumSize(new Dimension(800, 600));
 		frmAuriHispanoamericanaSa.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmAuriHispanoamericanaSa.setTitle("A\u00F1uri Hispanoamericana S.A.");
 		frmAuriHispanoamericanaSa.setBounds(100, 100, 450, 300);
@@ -79,6 +81,13 @@ public class home {
 		mnUsuario.add(mnAdministrarUsuarios);
 		
 		JMenuItem mntmNuevo = new JMenuItem("Nuevo");
+		mntmNuevo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				altaUsuario au = new altaUsuario(); 
+				au.frmNuevoUsuario.setVisible(true);
+				frmAuriHispanoamericanaSa.setEnabled(false);
+			}
+		});
 		mnAdministrarUsuarios.add(mntmNuevo);
 		
 		JMenuItem mntmModificar = new JMenuItem("Modificar");
