@@ -3,15 +3,18 @@
 "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory name="anuri">
+    <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.password">123456</property>
         <property name="hibernate.connection.url">jdbc:mysql://192.168.0.202:3306/anuri</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.search.autoregister_listeners">false</property>
+        <property name="hibernate.current_session_context_class">thread</property>
         <mapping resource="anuri/modelo/User.hbm.xml" />
         <mapping resource="anuri/modelo/Permiso.hbm.xml" />
         <mapping resource="anuri/modelo/UserPermiso.hbm.xml" />
+        
     </session-factory>
+    
 </hibernate-configuration>

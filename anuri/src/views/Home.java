@@ -61,7 +61,7 @@ public class Home {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
-        System.out.println(session.createQuery("select u.nombre from user as u").list());      
+        System.out.println(session.createQuery("select u.nombre from User as u").list());      
         session.getTransaction().commit();
 	}
 
@@ -72,7 +72,7 @@ public class Home {
 		frmAuriHispanoamericanaSa = new JFrame();
 		frmAuriHispanoamericanaSa.addWindowFocusListener(new WindowFocusListener() {
 			public void windowGainedFocus(WindowEvent e) {
-				//actual.toFront();
+				actual.toFront();
 			}
 			public void windowLostFocus(WindowEvent e) {
 			}
