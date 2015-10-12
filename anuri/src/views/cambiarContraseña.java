@@ -50,7 +50,6 @@ public class cambiarContraseña {
 	 */
 	private void initialize() {
 		frmCambiarContrasea = new JFrame();
-		frmCambiarContrasea.setType(Type.UTILITY);
 		frmCambiarContrasea.setResizable(false);
 		frmCambiarContrasea.setTitle("Cambiar contrase\u00F1a");
 		frmCambiarContrasea.setBounds(100, 100, 544, 265);
@@ -84,7 +83,7 @@ public class cambiarContraseña {
 		JButton button_1 = new JButton("Cancelar");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				home.frmAuriHispanoamericanaSa.setEnabled(true);
+				Home.frmAuriHispanoamericanaSa.setEnabled(true);
 				frmCambiarContrasea.dispose();
 			}
 		});

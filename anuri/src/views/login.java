@@ -72,7 +72,7 @@ public class login {
 		btnNewButton_1.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				home.frmAuriHispanoamericanaSa.setEnabled(true);
+				Home.frmAuriHispanoamericanaSa.setEnabled(true);
 				frmLogin.dispose();
 			}
 		});

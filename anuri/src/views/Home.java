@@ -25,8 +25,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class home {
- private JDialog actual;
+public class Home {
+  private JDialog actual;
   static JFrame frmAuriHispanoamericanaSa;
 	/**
 	 * Launch the application.
@@ -35,7 +35,7 @@ public class home {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					home window = new home();
+					Home window = new Home();
 					window.frmAuriHispanoamericanaSa.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,7 +47,7 @@ public class home {
 	/**
 	 * Create the application.
 	 */
-	public home() {
+	public Home() {
 		initialize();
 	}
 
@@ -78,13 +78,10 @@ public class home {
 		JMenuItem mntmIniciarSesion = new JMenuItem("Iniciar Sesi\u00F3n");
 		mntmIniciarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			//login log = new login(); 
-			//log.frmLogin.setVisible(true);			
-			//frmAuriHispanoamericanaSa.setEnabled(false);
-			newLogin log = new newLogin();
+		/*	newLogin log = new newLogin();
 			log.setVisible(true);
 			actual=log;
-			frmAuriHispanoamericanaSa.setEnabled(false);
+			frmAuriHispanoamericanaSa.setEnabled(false);*/
 			}
 		});
 		mnUsuario.add(mntmIniciarSesion);
@@ -108,8 +105,9 @@ public class home {
 		JMenuItem mntmNuevo = new JMenuItem("Nuevo");
 		mntmNuevo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				altaUsuario au = new altaUsuario(); 
-				au.frmNuevoUsuario.setVisible(true);
+				NewUser nu = new NewUser(); 
+				nu.setVisible(true);
+				actual=nu;
 				frmAuriHispanoamericanaSa.setEnabled(false);
 			}
 		});
