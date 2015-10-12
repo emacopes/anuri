@@ -88,9 +88,6 @@ public class Home {
 		});
 		mnUsuario.add(mntmIniciarSesion);
 		
-		JMenuItem mntmCerrarSesion = new JMenuItem("Cerrar Sesi\u00F3n");
-		mnUsuario.add(mntmCerrarSesion);
-		
 		JMenuItem mntmCambiarContrasea = new JMenuItem("Cambiar Contrase\u00F1a");
 		mntmCambiarContrasea.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -117,10 +114,29 @@ public class Home {
 		mnAdministrarUsuarios.add(mntmNuevo);
 		
 		JMenuItem mntmModificar = new JMenuItem("Modificar");
+		mntmModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ModifyUser mu=new ModifyUser();
+				mu.setVisible(true);
+				actual=mu;
+				frmAuriHispanoamericanaSa.setEnabled(false);
+			}
+		});
 		mnAdministrarUsuarios.add(mntmModificar);
 		
 		JMenuItem mntmEliminar = new JMenuItem("Eliminar");
+		mntmEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DeleteUser du=new DeleteUser();
+				du.setVisible(true);
+				actual=du;
+				frmAuriHispanoamericanaSa.setEnabled(false);
+			}
+		});
 		mnAdministrarUsuarios.add(mntmEliminar);
+		
+		JMenuItem mntmCerrarSesion = new JMenuItem("Cerrar Sesi\u00F3n");
+		mnUsuario.add(mntmCerrarSesion);
 		
 		
 		
@@ -148,7 +164,6 @@ public class Home {
 		JMenuItem mntmModificar_1 = new JMenuItem("Modificar");
 		mnAdministrarMateriales.add(mntmModificar_1);
 		frmAuriHispanoamericanaSa.getContentPane().setLayout(null);
-		frmAuriHispanoamericanaSa.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{menuBar, mnUsuario, mnMateriales}));
 		//mnAdministrarUsuarios.setVisible(false);
 	}	
 }
