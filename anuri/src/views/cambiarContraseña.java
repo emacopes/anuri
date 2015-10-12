@@ -53,7 +53,7 @@ public class cambiarContraseña {
 		frmCambiarContrasea.setType(Type.UTILITY);
 		frmCambiarContrasea.setResizable(false);
 		frmCambiarContrasea.setTitle("Cambiar contrase\u00F1a");
-		frmCambiarContrasea.setBounds(100, 100, 562, 278);
+		frmCambiarContrasea.setBounds(100, 100, 544, 265);
 		frmCambiarContrasea.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frmCambiarContrasea.getContentPane().setLayout(null);
 		

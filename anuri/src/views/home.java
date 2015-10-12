@@ -17,6 +17,9 @@ import java.awt.BorderLayout;
 import javax.swing.JRadioButtonMenuItem;
 import java.awt.Choice;
 import java.awt.Dimension;
+import javax.swing.JInternalFrame;
+import java.awt.event.WindowFocusListener;
+import java.awt.event.WindowEvent;
 
 public class home {
 
