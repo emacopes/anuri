@@ -2,7 +2,6 @@ package views;
 
 import java.awt.EventQueue;
 
-
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import org.hibernate.Query;
@@ -32,6 +31,7 @@ import org.hibernate.Session;
 import java.awt.Component;
 import anuri.modelo.*;
 import util.*;
+import javax.swing.JPanel;
 public class Home {
   private JDialog actual;
   static JFrame frmAuriHispanoamericanaSa;
@@ -49,6 +49,7 @@ public class Home {
 				}
 			}
 		});
+		
 	}
 
 	/**
@@ -56,13 +57,7 @@ public class Home {
 	 */
 	public Home() {
 		initialize();
-	}
-	private void ListarUsuarios(){
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-
-        System.out.println(session.createQuery("select u.nombre from User as u").list());      
-        session.getTransaction().commit();
+		
 	}
 
 	/**
@@ -82,6 +77,10 @@ public class Home {
 		frmAuriHispanoamericanaSa.setTitle("A\u00F1uri Hispanoamericana S.A.");
 		frmAuriHispanoamericanaSa.setBounds(100, 100, 450, 300);
 		frmAuriHispanoamericanaSa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		Fondo panel=new Fondo("/anuri.jpg");	
+	//	panel.setBounds(10, 150, 10,10);
+		frmAuriHispanoamericanaSa.getContentPane().add(panel);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frmAuriHispanoamericanaSa.setJMenuBar(menuBar);
@@ -176,16 +175,9 @@ public class Home {
 		
 		JMenuItem mntmModificar_1 = new JMenuItem("Modificar");
 		mnAdministrarMateriales.add(mntmModificar_1);
-		frmAuriHispanoamericanaSa.getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				ListarUsuarios();
-			}
-		});
-		btnNewButton.setBounds(131, 183, 89, 23);
-		frmAuriHispanoamericanaSa.getContentPane().add(btnNewButton);
+		
+		
 		//mnAdministrarUsuarios.setVisible(false);
 	}	
 }
