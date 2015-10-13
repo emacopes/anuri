@@ -57,6 +57,11 @@ public class Home {
 	 */
 	public Home() {
 		initialize();
+		Login log = new Login();
+		log.setVisible(true);
+		log.setLocationRelativeTo(frmAuriHispanoamericanaSa);
+		actual=log;
+		frmAuriHispanoamericanaSa.setEnabled(false);
 		
 	}
 
@@ -79,7 +84,6 @@ public class Home {
 		frmAuriHispanoamericanaSa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		Fondo panel=new Fondo("/anuri.jpg");	
-	//	panel.setBounds(10, 150, 10,10);
 		frmAuriHispanoamericanaSa.getContentPane().add(panel);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -94,6 +98,7 @@ public class Home {
 			public void actionPerformed(ActionEvent arg0) {
 			Login log = new Login();
 			log.setVisible(true);
+			log.setLocationRelativeTo(frmAuriHispanoamericanaSa);
 			actual=log;
 			frmAuriHispanoamericanaSa.setEnabled(false);
 			}
@@ -105,6 +110,7 @@ public class Home {
 			public void actionPerformed(ActionEvent arg0) {
 				ChangePassword cp=new ChangePassword();
 				cp.setVisible(true);
+				cp.setLocationRelativeTo(frmAuriHispanoamericanaSa);
 				actual=cp;
 				frmAuriHispanoamericanaSa.setEnabled(false);
 			}
@@ -119,6 +125,7 @@ public class Home {
 			public void actionPerformed(ActionEvent e) {
 				NewUser nu = new NewUser(); 
 				nu.setVisible(true);
+				nu.setLocationRelativeTo(frmAuriHispanoamericanaSa);
 				actual=nu;
 				frmAuriHispanoamericanaSa.setEnabled(false);
 			}
@@ -130,6 +137,7 @@ public class Home {
 			public void actionPerformed(ActionEvent e) {
 				ModifyUser mu=new ModifyUser();
 				mu.setVisible(true);
+				mu.setLocationRelativeTo(frmAuriHispanoamericanaSa);
 				actual=mu;
 				frmAuriHispanoamericanaSa.setEnabled(false);
 			}
@@ -141,6 +149,7 @@ public class Home {
 			public void actionPerformed(ActionEvent e) {
 				DeleteUser du=new DeleteUser();
 				du.setVisible(true);
+				du.setLocationRelativeTo(frmAuriHispanoamericanaSa);
 				actual=du;
 				frmAuriHispanoamericanaSa.setEnabled(false);
 			}
@@ -175,6 +184,7 @@ public class Home {
 		
 		JMenuItem mntmModificar_1 = new JMenuItem("Modificar");
 		mnAdministrarMateriales.add(mntmModificar_1);
+		
 		
 		
 		

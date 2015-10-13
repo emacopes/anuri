@@ -16,6 +16,8 @@ import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Window.Type;
+import java.awt.Dialog.ModalityType;
 
 public class ChangePassword extends JDialog {
 
