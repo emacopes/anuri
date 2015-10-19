@@ -23,6 +23,7 @@ import java.awt.Choice;
 import java.awt.Dimension;
 import javax.swing.JInternalFrame;
 import java.awt.event.WindowFocusListener;
+import java.util.List;
 import java.awt.event.WindowEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -30,8 +31,9 @@ import org.eclipse.wb.swing.FocusTraversalOnArray;
 import org.hibernate.Session;
 
 import java.awt.Component;
-import anuri.modelo.*;
 import util.*;
+import modelo.*;
+
 public class Home {
   private JDialog actual;
   static JFrame frmAuriHispanoamericanaSa;
@@ -58,11 +60,19 @@ public class Home {
 		initialize();
 	}
 	private void ListarUsuarios(){
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-
-        System.out.println(session.createQuery("select u.nombre from User as u").list());      
+       // List var = session.createQuery("select u.userId, u.nombre from User as u").list();
+       // System.out.println(var.toString());      
+        User usuario= new User();
+        usuario.setNombre("pepe");
+        usuario.setPassword("123");
+        Permiso permiso= new Permiso();
+        permiso.setNombre("login");
+        usuario.setPermisos(permiso);
+        session.save(usuario);
         session.getTransaction().commit();
+        session.close();
 	}
 
 	/**
@@ -72,7 +82,7 @@ public class Home {
 		frmAuriHispanoamericanaSa = new JFrame();
 		frmAuriHispanoamericanaSa.addWindowFocusListener(new WindowFocusListener() {
 			public void windowGainedFocus(WindowEvent e) {
-				actual.toFront();
+				if (actual != null) {actual.toFront();}
 			}
 			public void windowLostFocus(WindowEvent e) {
 			}
