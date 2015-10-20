@@ -12,8 +12,12 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import query.*;
+
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -53,6 +57,18 @@ public class Login extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			button_1 = new JButton("Aceptar");
+			button_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					UserQuery userQ=new UserQuery();
+					if (passwordField.getPassword().length==0 || textField.getText().length()==0){
+						JOptionPane.showMessageDialog(null, "Debe ingresar un nombre de usuario y contraseña.","Error",JOptionPane.PLAIN_MESSAGE);
+					}
+					else if (userQ.buscarUsuario(textField.getText())==null){
+						JOptionPane.showMessageDialog(null, "El usuario ingresado no existe.","Error",JOptionPane.PLAIN_MESSAGE);
+						
+					}
+				}
+			});
 			button_1.setFont(new Font("Century", Font.PLAIN, 16));
 			button_1.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 			button_1.setBounds(28, 108, 99, 35);
