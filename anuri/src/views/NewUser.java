@@ -18,6 +18,7 @@ import java.awt.Color;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import org.hibernate.Query;
@@ -27,7 +28,7 @@ public class NewUser extends JDialog {
 	private JTextField nameField;
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_1;
-	private List<JCheckBox> listCheckBox;
+	private List<JCheckBox> listCheckBox = new ArrayList<JCheckBox>();
 
 	/**
 	 * Launch the application.
