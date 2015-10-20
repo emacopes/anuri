@@ -44,7 +44,7 @@ public class Permiso implements java.io.Serializable {
 		this.users = user;
 	}
 	
-	public void setUsers(User user) {
+	public void addUsers(User user) {
 		this.users.add(user);
 	}
 

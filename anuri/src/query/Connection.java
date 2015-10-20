@@ -5,16 +5,15 @@ import org.hibernate.Session;
 import util.HibernateUtil;
 
 public class Connection {
-
+public Session session;
 	
-	public Session connect (){
-		Session session = HibernateUtil.getSessionFactory().openSession();
+	public void connect (){
+		this.session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
-		return session;
 	}
 	
-	public void disconnect(Session session){
-        session.getTransaction().commit();
-        session.close();
+	public void disconnect(){
+        this.session.getTransaction().commit();
+        this.session.close();
 	}
 }

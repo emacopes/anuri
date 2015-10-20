@@ -153,16 +153,8 @@ public class NewUser extends JDialog {
 					usuarioNuevo.setNombre(nameField.getText());
 					// seguir aca adentro del else
 					//buscar permisos en la tabla y asignar al usuario
-					Session session = HibernateUtil.getSessionFactory().openSession();
-					session.beginTransaction();
-					Query query = session.createQuery("from Permiso where nombre = :permisoNombre ");
-			        query.setParameter("permisoNombre", "login");
-			        List<?> list = query.list();
-			        Permiso permisoLogin= (Permiso)list.get(0);
-			        usuarioNuevo.setPermisos(permisoLogin);
-			        session.save(usuarioNuevo);
-			        session.getTransaction().commit();
-			        session.close();
+					PermisoQuery permisoQ = new PermisoQuery();
+					//permisoQ.buscarPermiso(checkbox.)
 				}
 				
 			}

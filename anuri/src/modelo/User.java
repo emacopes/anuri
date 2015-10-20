@@ -54,7 +54,7 @@ public class User implements java.io.Serializable {
 		this.permisos = permisos;
 	}
 
-	public void setPermisos(Permiso permisos) {
+	public void addPermisos(Permiso permisos) {
 		this.permisos.add(permisos);
 	}
 

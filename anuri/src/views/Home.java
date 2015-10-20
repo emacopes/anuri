@@ -59,23 +59,6 @@ public class Home {
 	public Home() {
 		initialize();
 	}
-	private void ListarUsuarios(){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-       // List var = session.createQuery("select u.userId, u.nombre from User as u").list();
-       // System.out.println(var.toString());      
-        User usuario= new User();
-        usuario.setNombre("pepe");
-        usuario.setPassword("123");
-        Permiso permiso= new Permiso();
-        permiso.setNombre("login");
-        usuario.setPermisos(permiso);
-        session.save(usuario);
-        session.getTransaction().commit();
-        session.close();
-        
-	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -188,15 +171,6 @@ public class Home {
 		JMenuItem mntmModificar_1 = new JMenuItem("Modificar");
 		mnAdministrarMateriales.add(mntmModificar_1);
 		frmAuriHispanoamericanaSa.getContentPane().setLayout(null);
-		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				ListarUsuarios();
-			}
-		});
-		btnNewButton.setBounds(131, 183, 89, 23);
-		frmAuriHispanoamericanaSa.getContentPane().add(btnNewButton);
 		//mnAdministrarUsuarios.setVisible(false);
 	}	
 }
