@@ -73,6 +73,7 @@ public class Home {
         session.save(usuario);
         session.getTransaction().commit();
         session.close();
+        
 	}
 
 	/**
