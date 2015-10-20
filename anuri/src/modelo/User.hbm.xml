@@ -11,7 +11,7 @@
         <property name="nombre" type="string">
             <column name="nombre" length="100" not-null="true" />
         </property>
-        <property name="password" type="string">
+        <property name="password" type="char[]">
             <column name="password" length="50" not-null="true" />
         </property>
         

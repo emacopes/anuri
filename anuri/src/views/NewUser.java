@@ -82,25 +82,25 @@ public class NewUser extends JDialog {
 		label_3.setBounds(6, 143, 168, 14);
 		getContentPane().add(label_3);
 		
-		JCheckBox checkBox = new JCheckBox("Administrar materiales");
-		checkBox.setFont(new Font("Century", Font.PLAIN, 13));
-		checkBox.setBounds(6, 164, 245, 23);
-		getContentPane().add(checkBox);
+		JCheckBox checkBox_0 = new JCheckBox("Administrar materiales");
+		checkBox_0.setFont(new Font("Century", Font.PLAIN, 13));
+		checkBox_0.setBounds(6, 164, 245, 23);
+		getContentPane().add(checkBox_0);
 		
 		JCheckBox checkBox_1 = new JCheckBox("Solicitar materiales");
 		checkBox_1.setFont(new Font("Century", Font.PLAIN, 13));
 		checkBox_1.setBounds(6, 190, 245, 23);
 		getContentPane().add(checkBox_1);
 		
-		JCheckBox checkBox_2 = new JCheckBox("Entrada de materiales");
-		checkBox_2.setFont(new Font("Century", Font.PLAIN, 13));
-		checkBox_2.setBounds(6, 216, 245, 23);
-		getContentPane().add(checkBox_2);
+		JCheckBox EntMat = new JCheckBox("Entrada de materiales");
+		EntMat.setFont(new Font("Century", Font.PLAIN, 13));
+		EntMat.setBounds(6, 216, 245, 23);
+		getContentPane().add(EntMat);
 		
-		JCheckBox checkBox_3 = new JCheckBox("Salida de materiales");
-		checkBox_3.setFont(new Font("Century", Font.PLAIN, 13));
-		checkBox_3.setBounds(6, 242, 245, 23);
-		getContentPane().add(checkBox_3);
+		JCheckBox SalMat = new JCheckBox("Salida de materiales");
+		SalMat.setFont(new Font("Century", Font.PLAIN, 13));
+		SalMat.setBounds(6, 242, 245, 23);
+		getContentPane().add(SalMat);
 		
 		JCheckBox checkBox_4 = new JCheckBox("New check box");
 		checkBox_4.setFont(new Font("Century", Font.PLAIN, 13));
@@ -149,12 +149,18 @@ public class NewUser extends JDialog {
 				if (!passwordField.getText().equals(passwordField_1.getText())){
 					JOptionPane.showMessageDialog(null, "Las contraseñas no son iguales","Contraseña",JOptionPane.ERROR_MESSAGE);
 				}else{
-					usuarioNuevo.setPassword(passwordField.getText());
+					Session session = HibernateUtil.getSessionFactory().openSession();
+					session.beginTransaction();
+					usuarioNuevo.setPassword(passwordField.getPassword());
 					usuarioNuevo.setNombre(nameField.getText());
+					session.save(usuarioNuevo);
+					session.getTransaction().commit();
+			        session.close();
 					// seguir aca adentro del else
 					//buscar permisos en la tabla y asignar al usuario
 					PermisoQuery permisoQ = new PermisoQuery();
-					//permisoQ.buscarPermiso(checkbox.)
+					
+					permisoQ.buscarPermiso(checkBox_0.getText());
 				}
 				
 			}
@@ -175,6 +181,6 @@ public class NewUser extends JDialog {
 		button_1.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		button_1.setBounds(505, 71, 99, 35);
 		getContentPane().add(button_1);
-		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{nameField, passwordField, passwordField_1, checkBox, checkBox_1, checkBox_2, checkBox_3, checkBox_4, checkBox_5, checkBox_6, checkBox_7, checkBox_8, checkBox_10, checkBox_9, checkBox_11, button, button_1}));
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{nameField, passwordField, passwordField_1, checkBox_0, checkBox_1, EntMat, SalMat, checkBox_4, checkBox_5, checkBox_6, checkBox_7, checkBox_8, checkBox_10, checkBox_9, checkBox_11, button, button_1}));
 	}
 }
