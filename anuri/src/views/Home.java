@@ -65,8 +65,8 @@ public class Home {
 	 * Create the application.
 	 */
 	public Home() {
-		initialize();
 		session = HibernateUtil.getSessionFactory().openSession();
+		initialize();
 		this.crearContextoInicial();
 		Login log = new Login();
 		log.setVisible(true);

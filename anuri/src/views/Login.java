@@ -22,6 +22,8 @@ import modelo.*;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Login extends JDialog {
 
@@ -47,6 +49,26 @@ public class Login extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
+	public void chequear(){
+		if (passwordField.getPassword().length==0 || textField.getText().length()==0){
+			JOptionPane.showMessageDialog(null, "Debe ingresar un nombre de usuario y contraseña.","Error",JOptionPane.PLAIN_MESSAGE);
+		}
+		else {
+			UserQuery userQ=new UserQuery();
+			User u=userQ.buscarUsuario(textField.getText());
+			if (u!=null){
+				if (u.getPassword().equals(passwordField.getText())){
+					Home.crearContextoParaUsuario(u);
+					Home.frmAuriHispanoamericanaSa.setEnabled(true);
+					dispose();
+				}
+				else JOptionPane.showMessageDialog(null, "La contraseña ingresada es incorrecta.","Error",JOptionPane.PLAIN_MESSAGE);
+			}
+			else JOptionPane.showMessageDialog(null, "El usuario ingresado no existe.","Error",JOptionPane.PLAIN_MESSAGE);
+
+		}
+	}
+
 	public Login() {
 		setResizable(false);
 		setTitle("Login");
@@ -55,29 +77,15 @@ public class Login extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+
 		contentPanel.setLayout(null);
 		{
 			button_1 = new JButton("Aceptar");
 			button_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					if (passwordField.getPassword().length==0 || textField.getText().length()==0){
-						JOptionPane.showMessageDialog(null, "Debe ingresar un nombre de usuario y contraseña.","Error",JOptionPane.PLAIN_MESSAGE);
-					}
-					else {
-						UserQuery userQ=new UserQuery();
-						User u=userQ.buscarUsuario(textField.getText());
-						if (u!=null){
-							if (u.getPassword().equals(passwordField.getText())){
-								Home.crearContextoParaUsuario(u);
-								Home.frmAuriHispanoamericanaSa.setEnabled(true);
-								dispose();
-							}
-							else JOptionPane.showMessageDialog(null, "La contraseña ingresada es incorrecta.","Error",JOptionPane.PLAIN_MESSAGE);
-						}
-						else JOptionPane.showMessageDialog(null, "El usuario ingresado no existe.","Error",JOptionPane.PLAIN_MESSAGE);
-						
+					chequear();
 				}
-			}
+
 			});
 			button_1.setFont(new Font("Century", Font.PLAIN, 16));
 			button_1.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
@@ -117,6 +125,15 @@ public class Login extends JDialog {
 		}
 		{
 			passwordField = new JPasswordField();
+			passwordField.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					int key = e.getKeyCode();
+					if (key == KeyEvent.VK_ENTER) {
+						chequear();
+					}
+				}
+			});
 			passwordField.setBounds(129, 49, 155, 20);
 			contentPanel.add(passwordField);
 		}
