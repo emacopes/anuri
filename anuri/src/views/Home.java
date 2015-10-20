@@ -38,8 +38,13 @@ import java.awt.event.WindowAdapter;
 public class Home {
   private JDialog actual;
   static JFrame frmAuriHispanoamericanaSa;
-  static User usuarioLogueado;
+  private static User usuarioLogueado;
   public static Session session;
+  private static JMenu mnAdministrarUsuarios=new JMenu("Administrar Usuarios");
+  private static JMenuItem mntmIniciarSesion = new JMenuItem("Iniciar Sesi\u00F3n");
+  private static JMenuItem mntmCambiarContrasea = new JMenuItem("Cambiar Contrase\u00F1a");
+  private static JMenuItem mntmCerrarSesion = new JMenuItem("Cerrar Sesi\u00F3n");
+  
 	/**
 	 * Launch the application.
 	 */
@@ -60,12 +65,39 @@ public class Home {
 	 * Create the application.
 	 */
 	public Home() {
-		session = HibernateUtil.getSessionFactory().openSession();
 		initialize();
+		session = HibernateUtil.getSessionFactory().openSession();
+		this.crearContextoInicial();
+		Login log = new Login();
+		log.setVisible(true);
+		log.setLocationRelativeTo(frmAuriHispanoamericanaSa);
+		actual=log;
+		frmAuriHispanoamericanaSa.setEnabled(false);
+		
 	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	private void crearContextoInicial(){
+		mntmIniciarSesion.setEnabled(true);
+		mntmCerrarSesion.setEnabled(false);
+		mntmCambiarContrasea.setEnabled(false);
+		
+		mnAdministrarUsuarios.setVisible(false);
+	}
+	
+	public static void crearContextoParaUsuario(User usuario){
+		mntmIniciarSesion.setEnabled(false);
+		mntmCerrarSesion.setEnabled(true);
+		
+		mntmCambiarContrasea.setEnabled(true);
+		if(usuario.getNombre().equals("rocio")){
+			mnAdministrarUsuarios.setVisible(true);
+			
+		}
+		usuarioLogueado=usuario;
+	}
+	
 	private void initialize() {
 		frmAuriHispanoamericanaSa = new JFrame();
 		frmAuriHispanoamericanaSa.addWindowListener(new WindowAdapter() {
@@ -97,7 +129,6 @@ public class Home {
 		menuBar.add(mnUsuario);
 		
 		
-		JMenuItem mntmIniciarSesion = new JMenuItem("Iniciar Sesi\u00F3n");
 		mntmIniciarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			Login log = new Login();
@@ -109,7 +140,7 @@ public class Home {
 		});
 		mnUsuario.add(mntmIniciarSesion);
 		
-		JMenuItem mntmCambiarContrasea = new JMenuItem("Cambiar Contrase\u00F1a");
+		
 		mntmCambiarContrasea.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ChangePassword cp=new ChangePassword();
@@ -121,7 +152,7 @@ public class Home {
 		});
 		mnUsuario.add(mntmCambiarContrasea);
 			
-		JMenu mnAdministrarUsuarios = new JMenu("Administrar Usuarios");
+		
 		mnUsuario.add(mnAdministrarUsuarios);
 		
 		JMenuItem mntmNuevo = new JMenuItem("Nuevo");
@@ -160,9 +191,13 @@ public class Home {
 		});
 		mnAdministrarUsuarios.add(mntmEliminar);
 		
-		JMenuItem mntmCerrarSesion = new JMenuItem("Cerrar Sesi\u00F3n");
 		mnUsuario.add(mntmCerrarSesion);
-		
+		mntmCerrarSesion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				usuarioLogueado=null;
+				crearContextoInicial();
+			}
+		});
 		
 		
 		mntmCerrarSesion.setEnabled(false);
@@ -188,7 +223,7 @@ public class Home {
 		
 		JMenuItem mntmModificar_1 = new JMenuItem("Modificar");
 		mnAdministrarMateriales.add(mntmModificar_1);
-		frmAuriHispanoamericanaSa.getContentPane().setLayout(null);
-		//mnAdministrarUsuarios.setVisible(false);
+		
+		mnAdministrarUsuarios.setVisible(false);
 	}	
 }

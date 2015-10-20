@@ -67,14 +67,8 @@ public class Login extends JDialog {
 						UserQuery userQ=new UserQuery();
 						User u=userQ.buscarUsuario(textField.getText());
 						if (u!=null){
-//							String passBase=u.getPassword();
-//							String passIngresada=passwordField.getPassword();
-//							System.out.println(passBase);
-//							System.out.println(passIngresada);
-//							System.out.println(passBase==passIngresada);
-//							System.out.println(passBase.equals(passIngresada));
 							if (u.getPassword().equals(passwordField.getText())){
-								Home.usuarioLogueado=u;
+								Home.crearContextoParaUsuario(u);
 								Home.frmAuriHispanoamericanaSa.setEnabled(true);
 								dispose();
 							}
