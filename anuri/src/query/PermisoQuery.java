@@ -2,22 +2,25 @@ package query;
 
 import org.hibernate.Query;
 import modelo.Permiso;
+import modelo.User;
+import views.Home;
 
 public class PermisoQuery {
 
 
 
 	public Permiso buscarPermiso(String nombre){
-		Connection connection = new Connection();
-		connection.connect();
-		Query query = connection.session.createQuery("from Permiso where nombre = :permisoNombre ");
+		Home.session.beginTransaction();
+		Query query = Home.session.createQuery("from Permiso where nombre = :permisoNombre ");
 		query.setParameter("permisoNombre", nombre);
-		connection.disconnect();
 		if (!query.list().isEmpty()){
 			Permiso permiso= (Permiso)query.list().get(0);
+			Home.session.getTransaction().commit();
 			return permiso;
 		}else{
+			Home.session.getTransaction().commit();
 			return null;
 		}
 	}
+
 }

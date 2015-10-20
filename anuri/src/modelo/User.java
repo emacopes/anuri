@@ -10,14 +10,14 @@ public class User implements java.io.Serializable {
 
 	private Integer userId;
 	private String nombre;
-	private char[] password;
+	private String password;
 	private Set<Permiso> permisos = new HashSet<Permiso>(0);
 
 	
 	public User() {
 	}
 
-	public User(String nombre, char[] password) {
+	public User(String nombre, String password) {
 		this.nombre = nombre;
 		this.password = password;
 	}
@@ -38,11 +38,11 @@ public class User implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
-	public char[] getPassword() {
+	public String getPassword() {
 		return this.password;
 	}
 
-	public void setPassword(char[] password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
@@ -54,7 +54,7 @@ public class User implements java.io.Serializable {
 		this.permisos = permisos;
 	}
 
-	public void addPermiso(Permiso permisos) {
+	public void addPermisos(Permiso permisos) {
 		this.permisos.add(permisos);
 	}
 

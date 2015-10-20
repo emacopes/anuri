@@ -2,17 +2,23 @@ package query;
 
 import org.hibernate.Query;
 import modelo.*;
+import views.*;
 
 public class UserQuery {
 	
 	public User buscarUsuario(String nombre){
-		Connection connection = new Connection();
-		connection.connect();
-		Query query = connection.session.createQuery("from User where nombre = :usuarioNombre ");
+		Home.session.beginTransaction();
+		Query query = Home.session.createQuery("from User where nombre = :usuarioNombre ");
         query.setParameter("usuarioNombre", nombre);
-        User usuario= (User)query.list().get(0);
-        connection.disconnect();
-		return usuario;
+        if (query.list().isEmpty()){
+        	Home.session.getTransaction().commit();
+        	return null;
+        }
+        else{
+        	User usuario= (User)query.list().get(0);
+        	Home.session.getTransaction().commit();
+        	return usuario;
+        }	
 	}
 
 }

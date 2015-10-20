@@ -17,6 +17,7 @@ import javax.swing.JPasswordField;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import query.*;
+import modelo.*;
 
 import java.awt.Component;
 import java.awt.event.ActionListener;
@@ -59,15 +60,30 @@ public class Login extends JDialog {
 			button_1 = new JButton("Aceptar");
 			button_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					UserQuery userQ=new UserQuery();
 					if (passwordField.getPassword().length==0 || textField.getText().length()==0){
 						JOptionPane.showMessageDialog(null, "Debe ingresar un nombre de usuario y contraseña.","Error",JOptionPane.PLAIN_MESSAGE);
 					}
-					else if (userQ.buscarUsuario(textField.getText())==null){
-						JOptionPane.showMessageDialog(null, "El usuario ingresado no existe.","Error",JOptionPane.PLAIN_MESSAGE);
+					else {
+						UserQuery userQ=new UserQuery();
+						User u=userQ.buscarUsuario(textField.getText());
+						if (u!=null){
+//							String passBase=u.getPassword();
+//							String passIngresada=passwordField.getPassword();
+//							System.out.println(passBase);
+//							System.out.println(passIngresada);
+//							System.out.println(passBase==passIngresada);
+//							System.out.println(passBase.equals(passIngresada));
+							if (u.getPassword().equals(passwordField.getText())){
+								Home.usuarioLogueado=u;
+								Home.frmAuriHispanoamericanaSa.setEnabled(true);
+								dispose();
+							}
+							else JOptionPane.showMessageDialog(null, "La contraseña ingresada es incorrecta.","Error",JOptionPane.PLAIN_MESSAGE);
+						}
+						else JOptionPane.showMessageDialog(null, "El usuario ingresado no existe.","Error",JOptionPane.PLAIN_MESSAGE);
 						
-					}
 				}
+			}
 			});
 			button_1.setFont(new Font("Century", Font.PLAIN, 16));
 			button_1.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));

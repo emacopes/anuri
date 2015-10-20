@@ -33,10 +33,13 @@ import org.hibernate.Session;
 import java.awt.Component;
 import util.*;
 import modelo.*;
+import java.awt.event.WindowAdapter;
 
 public class Home {
   private JDialog actual;
   static JFrame frmAuriHispanoamericanaSa;
+  static User usuarioLogueado;
+  public static Session session;
 	/**
 	 * Launch the application.
 	 */
@@ -57,6 +60,7 @@ public class Home {
 	 * Create the application.
 	 */
 	public Home() {
+		session = HibernateUtil.getSessionFactory().openSession();
 		initialize();
 	}
 	/**
@@ -64,6 +68,12 @@ public class Home {
 	 */
 	private void initialize() {
 		frmAuriHispanoamericanaSa = new JFrame();
+		frmAuriHispanoamericanaSa.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				session.close();
+			}
+		});
 		frmAuriHispanoamericanaSa.addWindowFocusListener(new WindowFocusListener() {
 			public void windowGainedFocus(WindowEvent e) {
 				if (actual != null) {actual.toFront();}

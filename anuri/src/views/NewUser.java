@@ -155,7 +155,7 @@ public class NewUser extends JDialog {
 				}else{
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					session.beginTransaction();
-					usuarioNuevo.setPassword(passwordField.getPassword());
+					usuarioNuevo.setPassword(passwordField.getText());
 					usuarioNuevo.setNombre(nameField.getText());
 					session.save(usuarioNuevo);
 					session.getTransaction().commit();
@@ -166,7 +166,7 @@ public class NewUser extends JDialog {
 					for (JCheckBox jCheckBox : listCheckBox) {
 						Permiso permiso=permisoQ.buscarPermiso(jCheckBox.getText());
 						if (jCheckBox.isSelected()){
-							usuarioNuevo.addPermiso(permiso);
+		//					usuarioNuevo.addPermiso(permiso);
 						} else{
 							// hacer function delPermiso
 						}
