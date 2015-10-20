@@ -12,6 +12,8 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JCheckBox;
 import javax.swing.border.LineBorder;
+
+import java.awt.Checkbox;
 import java.awt.Color;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
@@ -25,6 +27,7 @@ public class NewUser extends JDialog {
 	private JTextField nameField;
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_1;
+	private List<JCheckBox> listCheckBox;
 
 	/**
 	 * Launch the application.
@@ -92,15 +95,15 @@ public class NewUser extends JDialog {
 		checkBox_1.setBounds(6, 190, 245, 23);
 		getContentPane().add(checkBox_1);
 		
-		JCheckBox EntMat = new JCheckBox("Entrada de materiales");
-		EntMat.setFont(new Font("Century", Font.PLAIN, 13));
-		EntMat.setBounds(6, 216, 245, 23);
-		getContentPane().add(EntMat);
+		JCheckBox checkBox_2 = new JCheckBox("Entrada de materiales");
+		checkBox_2.setFont(new Font("Century", Font.PLAIN, 13));
+		checkBox_2.setBounds(6, 216, 245, 23);
+		getContentPane().add(checkBox_2);
 		
-		JCheckBox SalMat = new JCheckBox("Salida de materiales");
-		SalMat.setFont(new Font("Century", Font.PLAIN, 13));
-		SalMat.setBounds(6, 242, 245, 23);
-		getContentPane().add(SalMat);
+		JCheckBox checkBox_3 = new JCheckBox("Salida de materiales");
+		checkBox_3.setFont(new Font("Century", Font.PLAIN, 13));
+		checkBox_3.setBounds(6, 242, 245, 23);
+		getContentPane().add(checkBox_3);
 		
 		JCheckBox checkBox_4 = new JCheckBox("New check box");
 		checkBox_4.setFont(new Font("Century", Font.PLAIN, 13));
@@ -181,6 +184,21 @@ public class NewUser extends JDialog {
 		button_1.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		button_1.setBounds(505, 71, 99, 35);
 		getContentPane().add(button_1);
-		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{nameField, passwordField, passwordField_1, checkBox_0, checkBox_1, EntMat, SalMat, checkBox_4, checkBox_5, checkBox_6, checkBox_7, checkBox_8, checkBox_10, checkBox_9, checkBox_11, button, button_1}));
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{nameField, passwordField, passwordField_1, checkBox_0, checkBox_1, checkBox_2, checkBox_3, checkBox_4, checkBox_5, checkBox_6, checkBox_7, checkBox_8, checkBox_10, checkBox_9, checkBox_11, button, button_1}));
+	
+		// si se agrega un checkbox, agregarlo aca tambien.
+		listCheckBox.add(checkBox_0);
+		listCheckBox.add(checkBox_1);
+		listCheckBox.add(checkBox_2);
+		listCheckBox.add(checkBox_3);
+		listCheckBox.add(checkBox_4);
+		listCheckBox.add(checkBox_5);
+		listCheckBox.add(checkBox_6);
+		listCheckBox.add(checkBox_7);
+		listCheckBox.add(checkBox_8);
+		listCheckBox.add(checkBox_9);
+		listCheckBox.add(checkBox_10);
+		listCheckBox.add(checkBox_11);
+		
 	}
 }

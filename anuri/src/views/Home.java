@@ -77,6 +77,9 @@ public class Home {
 		frmAuriHispanoamericanaSa.setBounds(100, 100, 450, 300);
 		frmAuriHispanoamericanaSa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		Fondo panel=new Fondo("/anuri.jpg");	
+		frmAuriHispanoamericanaSa.getContentPane().add(panel);
+		
 		JMenuBar menuBar = new JMenuBar();
 		frmAuriHispanoamericanaSa.setJMenuBar(menuBar);
 		
@@ -88,6 +91,7 @@ public class Home {
 		mntmIniciarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			Login log = new Login();
+			log.setLocationRelativeTo(frmAuriHispanoamericanaSa);
 			log.setVisible(true);
 			actual=log;
 			frmAuriHispanoamericanaSa.setEnabled(false);
@@ -99,6 +103,7 @@ public class Home {
 		mntmCambiarContrasea.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ChangePassword cp=new ChangePassword();
+				cp.setLocationRelativeTo(frmAuriHispanoamericanaSa);
 				cp.setVisible(true);
 				actual=cp;
 				frmAuriHispanoamericanaSa.setEnabled(false);
@@ -113,17 +118,19 @@ public class Home {
 		mntmNuevo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NewUser nu = new NewUser(); 
+				nu.setLocationRelativeTo(frmAuriHispanoamericanaSa);
 				nu.setVisible(true);
 				actual=nu;
 				frmAuriHispanoamericanaSa.setEnabled(false);
 			}
 		});
 		mnAdministrarUsuarios.add(mntmNuevo);
-		
+				
 		JMenuItem mntmModificar = new JMenuItem("Modificar");
 		mntmModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ModifyUser mu=new ModifyUser();
+				mu.setLocationRelativeTo(frmAuriHispanoamericanaSa);
 				mu.setVisible(true);
 				actual=mu;
 				frmAuriHispanoamericanaSa.setEnabled(false);
@@ -135,6 +142,7 @@ public class Home {
 		mntmEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DeleteUser du=new DeleteUser();
+				du.setLocationRelativeTo(frmAuriHispanoamericanaSa);
 				du.setVisible(true);
 				actual=du;
 				frmAuriHispanoamericanaSa.setEnabled(false);
