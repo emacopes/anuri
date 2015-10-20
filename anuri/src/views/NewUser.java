@@ -163,8 +163,15 @@ public class NewUser extends JDialog {
 					// seguir aca adentro del else
 					//buscar permisos en la tabla y asignar al usuario
 					PermisoQuery permisoQ = new PermisoQuery();
+					for (JCheckBox jCheckBox : listCheckBox) {
+						Permiso permiso=permisoQ.buscarPermiso(jCheckBox.getText());
+						if (jCheckBox.isSelected()){
+							usuarioNuevo.addPermiso(permiso);
+						} else{
+							// hacer function delPermiso
+						}
+					}
 					
-					permisoQ.buscarPermiso(checkBox_0.getText());
 				}
 				
 			}
