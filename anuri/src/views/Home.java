@@ -201,10 +201,6 @@ public class Home {
 			}
 		});
 		
-		
-		mntmCerrarSesion.setEnabled(false);
-		//mntmCambiarContrasea.setEnabled(false);
-		
 		JMenu mnMateriales = new JMenu("Materiales");
 		menuBar.add(mnMateriales);
 		
