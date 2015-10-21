@@ -9,6 +9,7 @@ import org.hibernate.Query;
 import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JDialog;
 
@@ -196,6 +197,7 @@ public class Home {
 			public void actionPerformed(ActionEvent e) {
 				usuarioLogueado=null;
 				crearContextoInicial();
+				JOptionPane.showMessageDialog(null, "Su sesión ha sido cerrada.","Mensaje",JOptionPane.PLAIN_MESSAGE);
 			}
 		});
 		
