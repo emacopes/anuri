@@ -83,7 +83,7 @@ public class ChangePassword extends JDialog {
 		passwordField_1.setBounds(238, 103, 256, 20);
 		contentPanel.add(passwordField_1);
 		
-		JButton button = new JButton("Guardar");
+		final JButton button = new JButton("Guardar");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (passwordField_2.getPassword().length==0 || passwordField_1.getPassword().length==0 || passwordField.getPassword().length==0){
@@ -139,7 +139,7 @@ public class ChangePassword extends JDialog {
 		button.setBounds(112, 159, 99, 35);
 		contentPanel.add(button);
 		
-		JButton button_1 = new JButton("Cancelar");
+		final JButton button_1 = new JButton("Cancelar");
 		button_1.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
