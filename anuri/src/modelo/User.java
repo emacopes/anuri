@@ -54,8 +54,15 @@ public class User implements java.io.Serializable {
 		this.permisos = permisos;
 	}
 
-	public void addPermisos(Permiso permisos) {
-		this.permisos.add(permisos);
+	public void addPermiso(Permiso permiso) {
+		this.permisos.add(permiso);
+	}
+	
+	public void delPermiso(Permiso permiso){
+		if (this.permisos.contains(permiso)){
+			this.permisos.remove(permiso);
+		}
+		
 	}
 
 }
