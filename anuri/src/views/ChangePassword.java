@@ -13,11 +13,16 @@ import javax.swing.JPasswordField;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import util.HibernateUtil;
+
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Window.Type;
 import java.awt.Dialog.ModalityType;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class ChangePassword extends JDialog {
 
@@ -58,6 +63,7 @@ public class ChangePassword extends JDialog {
 		contentPanel.add(label);
 		
 		passwordField = new JPasswordField();
+	
 		passwordField.setBounds(238, 62, 256, 20);
 		contentPanel.add(passwordField);
 		
@@ -67,16 +73,53 @@ public class ChangePassword extends JDialog {
 		contentPanel.add(label_1);
 		
 		passwordField_1 = new JPasswordField();
+		
 		passwordField_1.setBounds(238, 103, 256, 20);
 		contentPanel.add(passwordField_1);
 		
 		JButton button = new JButton("Guardar");
+		button.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if (key == KeyEvent.VK_ENTER) {
+					button.doClick();
+				}
+			}
+		});
+		passwordField_1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if (key == KeyEvent.VK_ENTER) {
+					button.doClick();
+				}
+			}
+		});
+		passwordField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if (key == KeyEvent.VK_ENTER) {
+					button.doClick();
+				}
+			}
+		});
 		button.setFont(new Font("Century", Font.PLAIN, 16));
 		button.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		button.setBounds(112, 159, 99, 35);
 		contentPanel.add(button);
 		
 		JButton button_1 = new JButton("Cancelar");
+		button_1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if (key == KeyEvent.VK_ENTER) {
+					button_1.doClick();
+				}
+			}
+		});
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Home.frmAuriHispanoamericanaSa.setEnabled(true);
@@ -94,6 +137,15 @@ public class ChangePassword extends JDialog {
 		contentPanel.add(label_2);
 		
 		passwordField_2 = new JPasswordField();
+		passwordField_2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if (key == KeyEvent.VK_ENTER) {
+					button.doClick();
+				}
+			}
+		});
 		passwordField_2.setBounds(238, 21, 256, 20);
 		contentPanel.add(passwordField_2);
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{passwordField_2, passwordField, passwordField_1, button, button_1}));

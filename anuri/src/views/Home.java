@@ -66,8 +66,8 @@ public class Home {
 	 * Create the application.
 	 */
 	public Home() {
-		session = HibernateUtil.getSessionFactory().openSession();
 		initialize();
+		session = HibernateUtil.getSessionFactory().openSession();
 		this.crearContextoInicial();
 		Login log = new Login();
 		log.setVisible(true);
@@ -83,6 +83,7 @@ public class Home {
 		mntmIniciarSesion.setEnabled(true);
 		mntmCerrarSesion.setEnabled(false);
 		mntmCambiarContrasea.setEnabled(false);
+		frmAuriHispanoamericanaSa.setTitle("A\u00F1uri Hispanoamericana S.A.");
 		
 		mnAdministrarUsuarios.setVisible(false);
 	}
@@ -90,13 +91,14 @@ public class Home {
 	public static void crearContextoParaUsuario(User usuario){
 		mntmIniciarSesion.setEnabled(false);
 		mntmCerrarSesion.setEnabled(true);
+		usuarioLogueado=usuario;
+		frmAuriHispanoamericanaSa.setTitle(usuarioLogueado.getNombre() + " - A\u00F1uri Hispanoamericana S.A.");
 		
 		mntmCambiarContrasea.setEnabled(true);
-		if(usuario.getNombre().equals("rocio")){
+		if(usuarioLogueado.getNombre().equals("rocio")){
 			mnAdministrarUsuarios.setVisible(true);
 			
 		}
-		usuarioLogueado=usuario;
 	}
 	
 	private void initialize() {

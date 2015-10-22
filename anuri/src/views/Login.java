@@ -81,6 +81,15 @@ public class Login extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			button_1 = new JButton("Aceptar");
+			button_1.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					int key = e.getKeyCode();
+					if (key == KeyEvent.VK_ENTER) {
+						button_1.doClick();
+					}
+				}
+			});
 			button_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					chequear();
@@ -94,6 +103,15 @@ public class Login extends JDialog {
 		}
 		{
 			button = new JButton("Cancelar");
+			button.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					int key = e.getKeyCode();
+					if (key == KeyEvent.VK_ENTER) {
+						button.doClick();
+					}
+				}
+			});
 			button.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Home.frmAuriHispanoamericanaSa.setEnabled(true);
@@ -108,6 +126,15 @@ public class Login extends JDialog {
 		{
 			textField = new JTextField();
 			textField.setColumns(10);
+			textField.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					int key = e.getKeyCode();
+					if (key == KeyEvent.VK_ENTER) {
+						button_1.doClick();
+					}
+				}
+			});
 			textField.setBounds(129, 11, 155, 20);
 			contentPanel.add(textField);
 		}
@@ -130,7 +157,7 @@ public class Login extends JDialog {
 				public void keyPressed(KeyEvent e) {
 					int key = e.getKeyCode();
 					if (key == KeyEvent.VK_ENTER) {
-						chequear();
+						button_1.doClick();
 					}
 				}
 			});
