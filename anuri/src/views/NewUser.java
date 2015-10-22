@@ -23,6 +23,8 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class NewUser extends JDialog {
 	private JTextField nameField;
@@ -59,11 +61,13 @@ public class NewUser extends JDialog {
 		getContentPane().add(label);
 		
 		nameField = new JTextField();
+		
 		nameField.setColumns(10);
 		nameField.setBounds(186, 12, 198, 20);
 		getContentPane().add(nameField);
 		
 		passwordField = new JPasswordField();
+		
 		passwordField.setBounds(186, 50, 198, 20);
 		getContentPane().add(passwordField);
 		
@@ -146,28 +150,48 @@ public class NewUser extends JDialog {
 		checkBox_11.setBounds(253, 294, 268, 23);
 		getContentPane().add(checkBox_11);
 		
-		JButton button = new JButton("Guardar");
+		final JButton button = new JButton("Guardar");
+		button.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if (key == KeyEvent.VK_ENTER) {
+					button.doClick();
+				}
+			}
+		});
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				User usuarioNuevo = new User();
-				if (!passwordField.getText().equals(passwordField_1.getText())){
-					JOptionPane.showMessageDialog(null, "Las contraseñas no son iguales","Contraseña",JOptionPane.ERROR_MESSAGE);
-				}else{
-					usuarioNuevo.setPassword(passwordField.getText());
-					usuarioNuevo.setNombre(nameField.getText());
-					PermisoQuery permisoQ = new PermisoQuery();
-					for (JCheckBox jCheckBox : listCheckBox) {
-						Permiso permiso=permisoQ.buscarPermiso(jCheckBox.getText());
-						if (jCheckBox.isSelected()){
-							usuarioNuevo.addPermiso(permiso);
-						} 
-					}
-					Home.session.save(usuarioNuevo);
-					Home.frmAuriHispanoamericanaSa.setEnabled(true);
-					dispose();
+				if (passwordField.getPassword().length==0 || passwordField_1.getPassword().length==0 || nameField.getText().length()==0){
+					JOptionPane.showMessageDialog(null, "Debe completar todos los campos.","Error",JOptionPane.PLAIN_MESSAGE);
 				}
-				
-				
+				else{
+					UserQuery userQ=new UserQuery();
+					User u=userQ.buscarUsuario(nameField.getText());
+					if (u==null){
+						if (!passwordField.getText().equals(passwordField_1.getText())){
+							JOptionPane.showMessageDialog(null, "Las contraseñas nuevas deben coincidir.","Error",JOptionPane.PLAIN_MESSAGE);
+						}else{
+							User usuarioNuevo = new User();
+							usuarioNuevo.setPassword(passwordField.getText());
+							usuarioNuevo.setNombre(nameField.getText());
+							PermisoQuery permisoQ = new PermisoQuery();
+							for (JCheckBox jCheckBox : listCheckBox) {
+								Permiso permiso=permisoQ.buscarPermiso(jCheckBox.getText());
+								if (jCheckBox.isSelected()){
+									usuarioNuevo.addPermiso(permiso);
+								} 
+							}
+							Home.session.save(usuarioNuevo);
+							JOptionPane.showMessageDialog(null, "El usuario ha sido creado correctamente.","Usuario creado",JOptionPane.PLAIN_MESSAGE);
+							Home.frmAuriHispanoamericanaSa.setEnabled(true);
+							dispose();
+						}
+					}
+					else{
+						JOptionPane.showMessageDialog(null, "Ya existe un usuario con ese nombre.","Error",JOptionPane.PLAIN_MESSAGE);
+					}
+				}
 			}
 		});
 		button.setFont(new Font("Century", Font.PLAIN, 16));
@@ -175,7 +199,16 @@ public class NewUser extends JDialog {
 		button.setBounds(505, 11, 99, 35);
 		getContentPane().add(button);
 		
-		JButton button_1 = new JButton("Cancelar");
+		final JButton button_1 = new JButton("Cancelar");
+		button_1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if (key == KeyEvent.VK_ENTER) {
+					button_1.doClick();
+				}
+			}
+		});
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Home.frmAuriHispanoamericanaSa.setEnabled(true);
@@ -188,6 +221,36 @@ public class NewUser extends JDialog {
 		getContentPane().add(button_1);
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{nameField, passwordField, passwordField_1, checkBox_0, checkBox_1, checkBox_2, checkBox_3, checkBox_4, checkBox_5, checkBox_6, checkBox_7, checkBox_8, checkBox_10, checkBox_9, checkBox_11, button, button_1}));
 	
+		nameField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if (key == KeyEvent.VK_ENTER) {
+					button.doClick();
+				}
+			}
+		});
+		
+		passwordField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if (key == KeyEvent.VK_ENTER) {
+					button.doClick();
+				}
+			}
+		});
+		
+		passwordField_1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if (key == KeyEvent.VK_ENTER) {
+					button.doClick();
+				}
+			}
+		});
+		
 		// si se agrega un checkbox, agregarlo aca tambien.
 		listCheckBox.add(checkBox_0);
 		listCheckBox.add(checkBox_1);
