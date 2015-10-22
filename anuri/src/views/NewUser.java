@@ -153,26 +153,20 @@ public class NewUser extends JDialog {
 				if (!passwordField.getText().equals(passwordField_1.getText())){
 					JOptionPane.showMessageDialog(null, "Las contraseñas no son iguales","Contraseña",JOptionPane.ERROR_MESSAGE);
 				}else{
-					Session session = HibernateUtil.getSessionFactory().openSession();
-					session.beginTransaction();
 					usuarioNuevo.setPassword(passwordField.getText());
 					usuarioNuevo.setNombre(nameField.getText());
-					session.save(usuarioNuevo);
-					session.getTransaction().commit();
-			        session.close();
-					// seguir aca adentro del else
-					//buscar permisos en la tabla y asignar al usuario
 					PermisoQuery permisoQ = new PermisoQuery();
 					for (JCheckBox jCheckBox : listCheckBox) {
 						Permiso permiso=permisoQ.buscarPermiso(jCheckBox.getText());
 						if (jCheckBox.isSelected()){
 							usuarioNuevo.addPermiso(permiso);
-						} else{
-							usuarioNuevo.delPermiso(permiso);
-						}
+						} 
 					}
-					
+					Home.session.save(usuarioNuevo);
+					Home.frmAuriHispanoamericanaSa.setEnabled(true);
+					dispose();
 				}
+				
 				
 			}
 		});
@@ -199,7 +193,7 @@ public class NewUser extends JDialog {
 		listCheckBox.add(checkBox_1);
 		listCheckBox.add(checkBox_2);
 		listCheckBox.add(checkBox_3);
-		listCheckBox.add(checkBox_4);
+	/*	listCheckBox.add(checkBox_4);
 		listCheckBox.add(checkBox_5);
 		listCheckBox.add(checkBox_6);
 		listCheckBox.add(checkBox_7);
@@ -207,6 +201,6 @@ public class NewUser extends JDialog {
 		listCheckBox.add(checkBox_9);
 		listCheckBox.add(checkBox_10);
 		listCheckBox.add(checkBox_11);
-		
+	*/	
 	}
 }
