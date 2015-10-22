@@ -13,6 +13,7 @@ import javax.swing.JPasswordField;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
+import org.hibernate.engine.jdbc.connections.internal.UserSuppliedConnectionProviderImpl;
 
 import util.HibernateUtil;
 
@@ -41,6 +42,7 @@ public class ChangePassword extends JDialog {
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
+
 		}
 	}
 

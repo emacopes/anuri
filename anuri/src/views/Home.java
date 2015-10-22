@@ -39,7 +39,7 @@ import java.awt.event.WindowAdapter;
 public class Home {
   private JDialog actual;
   static JFrame frmAuriHispanoamericanaSa;
-  private static User usuarioLogueado;
+  static User usuarioLogueado;
   public static Session session;
   private static JMenu mnAdministrarUsuarios=new JMenu("Administrar Usuarios");
   private static JMenuItem mntmIniciarSesion = new JMenuItem("Iniciar Sesi\u00F3n");
