@@ -8,6 +8,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JPasswordField;
 import javax.swing.border.LineBorder;
@@ -15,6 +17,8 @@ import java.awt.Color;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import org.hibernate.engine.jdbc.connections.internal.UserSuppliedConnectionProviderImpl;
 
+import modelo.User;
+import query.UserQuery;
 import util.HibernateUtil;
 
 import java.awt.Component;
@@ -79,7 +83,30 @@ public class ChangePassword extends JDialog {
 		passwordField_1.setBounds(238, 103, 256, 20);
 		contentPanel.add(passwordField_1);
 		
-		final JButton button = new JButton("Guardar");
+		JButton button = new JButton("Guardar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (passwordField_2.getPassword().length==0 || passwordField_1.getPassword().length==0 || passwordField.getPassword().length==0){
+					JOptionPane.showMessageDialog(null, "Debe llenar todos los campos.","Error",JOptionPane.PLAIN_MESSAGE);
+				}
+				else {
+					User u=Home.usuarioLogueado;
+					if (u.getPassword().equals(passwordField_2.getText())){
+						if (passwordField.getText().equals(passwordField_1.getText())){
+							u.setPassword(passwordField.getText());
+							Home.session.save(u);
+							JOptionPane.showMessageDialog(null, "La contraseña se ha cambiado con éxito.","Contraseña modificada",JOptionPane.PLAIN_MESSAGE);
+							Home.frmAuriHispanoamericanaSa.setEnabled(true);
+							dispose();
+						}
+						else
+							JOptionPane.showMessageDialog(null, "Las contraseñas nuevas deben coincidir.","Error",JOptionPane.PLAIN_MESSAGE);
+					}
+					else JOptionPane.showMessageDialog(null, "La contraseña actual es incorrecta.","Error",JOptionPane.PLAIN_MESSAGE);
+				}
+			}
+		});
+		
 		button.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -112,7 +139,7 @@ public class ChangePassword extends JDialog {
 		button.setBounds(112, 159, 99, 35);
 		contentPanel.add(button);
 		
-		final JButton button_1 = new JButton("Cancelar");
+		JButton button_1 = new JButton("Cancelar");
 		button_1.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -152,4 +179,6 @@ public class ChangePassword extends JDialog {
 		contentPanel.add(passwordField_2);
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{passwordField_2, passwordField, passwordField_1, button, button_1}));
 	}
+	
+	
 }
