@@ -25,6 +25,7 @@ import java.awt.Dimension;
 import javax.swing.JInternalFrame;
 import java.awt.event.WindowFocusListener;
 import java.util.List;
+import java.util.Set;
 import java.awt.event.WindowEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -34,6 +35,8 @@ import org.hibernate.Session;
 import java.awt.Component;
 import util.*;
 import modelo.*;
+import query.PermisoQuery;
+
 import java.awt.event.WindowAdapter;
 
 public class Home {
@@ -45,6 +48,10 @@ public class Home {
   private static JMenuItem mntmIniciarSesion = new JMenuItem("Iniciar Sesi\u00F3n");
   private static JMenuItem mntmCambiarContrasea = new JMenuItem("Cambiar Contrase\u00F1a");
   private static JMenuItem mntmCerrarSesion = new JMenuItem("Cerrar Sesi\u00F3n");
+  private static JMenuItem mntmEntrada = new JMenuItem("Entrada");
+  private static JMenuItem mntmDespiece = new JMenuItem("Despiece");
+  private static JMenuItem mntmSolicitud = new JMenuItem("Solicitud");
+  private static JMenu mnAdministrarMateriales = new JMenu("Administrar Materiales");
   
 	/**
 	 * Launch the application.
@@ -83,6 +90,10 @@ public class Home {
 		mntmIniciarSesion.setEnabled(true);
 		mntmCerrarSesion.setEnabled(false);
 		mntmCambiarContrasea.setEnabled(false);
+		mnAdministrarMateriales.setEnabled(false);
+		mntmSolicitud.setEnabled(false);
+		mntmEntrada.setEnabled(false);
+		mntmDespiece.setEnabled(false);
 		frmAuriHispanoamericanaSa.setTitle("A\u00F1uri Hispanoamericana S.A.");
 		
 		mnAdministrarUsuarios.setVisible(false);
@@ -97,7 +108,21 @@ public class Home {
 		mntmCambiarContrasea.setEnabled(true);
 		if(usuarioLogueado.getNombre().equals("rocio")){
 			mnAdministrarUsuarios.setVisible(true);
-			
+		}
+		Set<Permiso> permisos_user=usuarioLogueado.getPermisos();
+		
+		for (Permiso permiso : permisos_user){
+			String nombre=permiso.getNombre();
+			switch(nombre){
+			case "Administrar materiales":
+				mnAdministrarMateriales.setEnabled(true);break;
+			case "Solicitar materiales":
+				mntmSolicitud.setEnabled(true);break;
+			case "Entrada de materiales":
+				mntmEntrada.setEnabled(true);break;
+			case "Salida de materiales":
+				mntmDespiece.setEnabled(true);break;
+			}
 		}
 	}
 	
@@ -206,16 +231,12 @@ public class Home {
 		JMenu mnMateriales = new JMenu("Materiales");
 		menuBar.add(mnMateriales);
 		
-		JMenuItem mntmEntrada = new JMenuItem("Entrada");
 		mnMateriales.add(mntmEntrada);
 		
-		JMenuItem mntmDespiece = new JMenuItem("Despiece");
 		mnMateriales.add(mntmDespiece);
 		
-		JMenuItem mntmSolicitud = new JMenuItem("Solicitud");
 		mnMateriales.add(mntmSolicitud);
 		
-		JMenu mnAdministrarMateriales = new JMenu("Administrar Materiales");
 		mnMateriales.add(mnAdministrarMateriales);
 		
 		JMenuItem mntmNuevo_1 = new JMenuItem("Nuevo");

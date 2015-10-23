@@ -1,7 +1,9 @@
 package modelo;
 // Generated 19-oct-2015 19:13:07 by Hibernate Tools 4.0.0
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
