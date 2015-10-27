@@ -94,7 +94,8 @@ public class ChangePassword extends JDialog {
 					if (u.getPassword().equals(passwordField_2.getText())){
 						if (passwordField.getText().equals(passwordField_1.getText())){
 							u.setPassword(passwordField.getText());
-							Home.session.save(u);
+							Home.session.update(u);
+							Home.session.flush();
 							JOptionPane.showMessageDialog(null, "La contraseña se ha cambiado con éxito.","Contraseña modificada",JOptionPane.PLAIN_MESSAGE);
 							Home.frmAuriHispanoamericanaSa.setEnabled(true);
 							dispose();

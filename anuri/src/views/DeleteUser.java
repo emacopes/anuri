@@ -64,6 +64,7 @@ public class DeleteUser extends JDialog {
 			comboBox.setToolTipText("");
 			comboBox.setName("");
 			comboBox.setBounds(99, 34, 248, 29);
+			comboBox.addItem("Seleccione un usuario...");
 			UserQuery userQ=new UserQuery();
 			List<User> otrosUsuarios=userQ.buscarOtrosUsuarios(Home.usuarioLogueado.getNombre());
 			if (otrosUsuarios!=null){
@@ -92,14 +93,20 @@ public class DeleteUser extends JDialog {
 			JButton btnEliminar = new JButton("Eliminar");
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					int rta=JOptionPane.showConfirmDialog(null, "Esta seguro que desea eliminar el usuario?.","Advertencia",JOptionPane.YES_NO_OPTION);
-					if (rta==JOptionPane.YES_OPTION){
-						UserQuery userQ=new UserQuery();
-						User usuarioSeleccionado=userQ.buscarUsuario(comboBox.getSelectedItem().toString());
-						Home.session.delete(usuarioSeleccionado);
-						JOptionPane.showMessageDialog(null, "El usuario ha sido eliminado.","Usuario eliminado",JOptionPane.PLAIN_MESSAGE);
-						Home.frmAuriHispanoamericanaSa.setEnabled(true);
-						dispose();
+					if (comboBox.getSelectedItem().toString().equals("Seleccione un usuario...")){
+						JOptionPane.showMessageDialog(null, "Elija un usuario.","Error",JOptionPane.PLAIN_MESSAGE);
+					}
+					else{
+						int rta=JOptionPane.showConfirmDialog(null, "Esta seguro que desea eliminar el usuario?.","Advertencia",JOptionPane.YES_NO_OPTION);
+						if (rta==JOptionPane.YES_OPTION){
+							UserQuery userQ=new UserQuery();
+							User usuarioSeleccionado=userQ.buscarUsuario(comboBox.getSelectedItem().toString());
+							Home.session.delete(usuarioSeleccionado);
+							Home.session.flush();
+							JOptionPane.showMessageDialog(null, "El usuario ha sido eliminado.","Usuario eliminado",JOptionPane.PLAIN_MESSAGE);
+							Home.frmAuriHispanoamericanaSa.setEnabled(true);
+							dispose();
+						}
 					}
 				}
 			});

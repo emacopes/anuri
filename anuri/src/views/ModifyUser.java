@@ -23,11 +23,15 @@ import javax.swing.JCheckBox;
 import javax.swing.border.BevelBorder;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
+import modelo.Permiso;
 import modelo.User;
+import query.PermisoQuery;
 import query.UserQuery;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.awt.event.ActionEvent;
 
 public class ModifyUser extends JDialog {
@@ -36,6 +40,7 @@ public class ModifyUser extends JDialog {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_1;
+	private List<JCheckBox> listCheckBox = new ArrayList<JCheckBox>();
 
 	/**
 	 * Launch the application.
@@ -54,6 +59,7 @@ public class ModifyUser extends JDialog {
 	 * Create the dialog.
 	 */
 	public ModifyUser() {
+		
 		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
 		setTitle("Modificar usuario");
@@ -68,10 +74,31 @@ public class ModifyUser extends JDialog {
 		label.setBounds(34, 28, 83, 29);
 		contentPanel.add(label);
 		
-		JComboBox comboBox = new JComboBox();
+		final JComboBox comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (!comboBox.getSelectedItem().toString().equals("Seleccione un usuario...")){
+					UserQuery userQ=new UserQuery();
+					User userSeleccionado=userQ.buscarUsuario(comboBox.getSelectedItem().toString());
+					for (JCheckBox checkBox : listCheckBox){
+						checkBox.setSelected(false);
+					}
+					textField.setText(userSeleccionado.getNombre());
+					Set<Permiso> permisos= userSeleccionado.getPermisos();
+					for (Permiso permiso:permisos){
+						for (JCheckBox checkBox : listCheckBox){
+							if(permiso.getNombre().equals(checkBox.getText())){
+								checkBox.setSelected(true);
+							}
+						}
+					}
+				}
+			}
+		});
 		comboBox.setToolTipText("");
 		comboBox.setName("");
 		comboBox.setBounds(123, 28, 273, 29);
+		comboBox.addItem("Seleccione un usuario...");
 		UserQuery userQ=new UserQuery();
 		List<User> otrosUsuarios=userQ.buscarOtrosUsuarios(Home.usuarioLogueado.getNombre());
 		if (otrosUsuarios!=null){
@@ -95,6 +122,7 @@ public class ModifyUser extends JDialog {
 		panel.add(label_1);
 		
 		textField = new JTextField();
+		textField.setEditable(false);
 		textField.setColumns(10);
 		textField.setBounds(266, 30, 233, 20);
 		panel.add(textField);
@@ -122,10 +150,10 @@ public class ModifyUser extends JDialog {
 		label_4.setBounds(38, 160, 168, 14);
 		panel.add(label_4);
 		
-		JCheckBox checkBox = new JCheckBox("Administrar materiales");
-		checkBox.setFont(new Font("Century", Font.PLAIN, 13));
-		checkBox.setBounds(38, 181, 245, 23);
-		panel.add(checkBox);
+		JCheckBox checkBox_0 = new JCheckBox("Administrar materiales");
+		checkBox_0.setFont(new Font("Century", Font.PLAIN, 13));
+		checkBox_0.setBounds(38, 181, 245, 23);
+		panel.add(checkBox_0);
 		
 		JCheckBox checkBox_1 = new JCheckBox("Solicitar materiales");
 		checkBox_1.setFont(new Font("Century", Font.PLAIN, 13));
@@ -193,12 +221,68 @@ public class ModifyUser extends JDialog {
 		contentPanel.add(button_1);
 		button_1.setFont(new Font("Century", Font.PLAIN, 16));
 		button_1.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-		
+
 		JButton button = new JButton("Guardar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (comboBox.getSelectedItem().toString().equals("Seleccione un usuario...")){
+					JOptionPane.showMessageDialog(null, "Elija un usuario.","Error",JOptionPane.PLAIN_MESSAGE);
+				}
+				else{
+					UserQuery userQ=new UserQuery();
+					User usuarioSeleccionado=userQ.buscarUsuario(textField.getText());
+					PermisoQuery permisoQ = new PermisoQuery();
+					for (JCheckBox jCheckBox : listCheckBox) {
+						Permiso permiso=permisoQ.buscarPermiso(jCheckBox.getText());
+						if (jCheckBox.isSelected()){
+							usuarioSeleccionado.addPermiso(permiso);
+						} 
+						else{
+							usuarioSeleccionado.delPermiso(permiso);
+						}
+					}	
+					if (!(passwordField.getPassword().length==0 && passwordField_1.getPassword().length==0)){
+						if (!passwordField.getText().equals(passwordField_1.getText())){
+							JOptionPane.showMessageDialog(null, "Las contraseñas nuevas deben coincidir.","Error",JOptionPane.PLAIN_MESSAGE);
+						}
+						else{
+							usuarioSeleccionado.setPassword(passwordField.getText());
+							Home.session.update(usuarioSeleccionado);
+							Home.session.flush();
+							JOptionPane.showMessageDialog(null, "El usuario ha sido modificado correctamente.","Usuario modificado",JOptionPane.PLAIN_MESSAGE);
+							Home.frmAuriHispanoamericanaSa.setEnabled(true);
+							dispose();
+						}
+					}
+					else{
+						Home.session.update(usuarioSeleccionado);
+						Home.session.flush();
+						JOptionPane.showMessageDialog(null, "El usuario ha sido modificado correctamente.","Usuario modificado",JOptionPane.PLAIN_MESSAGE);
+						Home.frmAuriHispanoamericanaSa.setEnabled(true);
+						dispose();
+					}
+				}
+			}
+		});
 		button.setBounds(433, 25, 99, 35);
 		contentPanel.add(button);
 		button.setFont(new Font("Century", Font.PLAIN, 16));
 		button.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{comboBox, textField, passwordField, passwordField_1, checkBox, checkBox_1, checkBox_2, checkBox_3, checkBox_4, checkBox_5, checkBox_6, checkBox_7, checkBox_8, checkBox_10, checkBox_9, checkBox_11, button, button_1}));
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{comboBox, textField, passwordField, passwordField_1, checkBox_0, checkBox_1, checkBox_2, checkBox_3, checkBox_4, checkBox_5, checkBox_6, checkBox_7, checkBox_8, checkBox_10, checkBox_9, checkBox_11, button, button_1}));
+	
+		// si se agrega un checkbox, agregarlo aca tambien.
+				listCheckBox.add(checkBox_0);
+				listCheckBox.add(checkBox_1);
+				listCheckBox.add(checkBox_2);
+				listCheckBox.add(checkBox_3);
+			/*	listCheckBox.add(checkBox_4);
+				listCheckBox.add(checkBox_5);
+				listCheckBox.add(checkBox_6);
+				listCheckBox.add(checkBox_7);
+				listCheckBox.add(checkBox_8);
+				listCheckBox.add(checkBox_9);
+				listCheckBox.add(checkBox_10);
+				listCheckBox.add(checkBox_11);
+			*/	
 	}
 }

@@ -176,9 +176,9 @@ public class NewUser extends JDialog {
 							usuarioNuevo.setPassword(passwordField.getText());
 							usuarioNuevo.setNombre(nameField.getText());
 							PermisoQuery permisoQ = new PermisoQuery();
-							for (JCheckBox jCheckBox : listCheckBox) {
-								Permiso permiso=permisoQ.buscarPermiso(jCheckBox.getText());
+							for (JCheckBox jCheckBox : listCheckBox) {								
 								if (jCheckBox.isSelected()){
+									Permiso permiso=permisoQ.buscarPermiso(jCheckBox.getText());
 									usuarioNuevo.addPermiso(permiso);
 								} 
 							}
