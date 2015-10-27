@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import javax.swing.JSplitPane;
 import java.awt.Font;
@@ -21,7 +22,12 @@ import javax.swing.JPasswordField;
 import javax.swing.JCheckBox;
 import javax.swing.border.BevelBorder;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import modelo.User;
+import query.UserQuery;
+
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class ModifyUser extends JDialog {
@@ -66,6 +72,15 @@ public class ModifyUser extends JDialog {
 		comboBox.setToolTipText("");
 		comboBox.setName("");
 		comboBox.setBounds(123, 28, 273, 29);
+		UserQuery userQ=new UserQuery();
+		List<User> otrosUsuarios=userQ.buscarOtrosUsuarios(Home.usuarioLogueado.getNombre());
+		if (otrosUsuarios!=null){
+			for (User u:otrosUsuarios){
+				comboBox.addItem(u.getNombre());
+			}
+		}
+		else JOptionPane.showMessageDialog(null, "No existen usuarios para modificar.","Error",JOptionPane.PLAIN_MESSAGE);
+		
 		contentPanel.add(comboBox);
 		
 		JPanel panel = new JPanel();

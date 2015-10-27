@@ -183,6 +183,7 @@ public class NewUser extends JDialog {
 								} 
 							}
 							Home.session.save(usuarioNuevo);
+							Home.session.flush();
 							JOptionPane.showMessageDialog(null, "El usuario ha sido creado correctamente.","Usuario creado",JOptionPane.PLAIN_MESSAGE);
 							Home.frmAuriHispanoamericanaSa.setEnabled(true);
 							dispose();
