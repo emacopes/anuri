@@ -231,6 +231,7 @@ public class ModifyUser extends JDialog {
 				else{
 					UserQuery userQ=new UserQuery();
 					User usuarioSeleccionado=userQ.buscarUsuario(textField.getText());
+					Boolean continuar=true;
 					PermisoQuery permisoQ = new PermisoQuery();
 					for (JCheckBox jCheckBox : listCheckBox) {
 						Permiso permiso=permisoQ.buscarPermiso(jCheckBox.getText());
@@ -243,18 +244,14 @@ public class ModifyUser extends JDialog {
 					}	
 					if (!(passwordField.getPassword().length==0 && passwordField_1.getPassword().length==0)){
 						if (!passwordField.getText().equals(passwordField_1.getText())){
+							continuar=false;
 							JOptionPane.showMessageDialog(null, "Las contraseñas nuevas deben coincidir.","Error",JOptionPane.PLAIN_MESSAGE);
 						}
 						else{
 							usuarioSeleccionado.setPassword(passwordField.getText());
-							Home.session.update(usuarioSeleccionado);
-							Home.session.flush();
-							JOptionPane.showMessageDialog(null, "El usuario ha sido modificado correctamente.","Usuario modificado",JOptionPane.PLAIN_MESSAGE);
-							Home.frmAuriHispanoamericanaSa.setEnabled(true);
-							dispose();
 						}
 					}
-					else{
+					if(continuar){
 						Home.session.update(usuarioSeleccionado);
 						Home.session.flush();
 						JOptionPane.showMessageDialog(null, "El usuario ha sido modificado correctamente.","Usuario modificado",JOptionPane.PLAIN_MESSAGE);
