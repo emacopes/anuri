@@ -102,7 +102,6 @@ public class DeleteUser extends JDialog {
 							UserQuery userQ=new UserQuery();
 							User usuarioSeleccionado=userQ.buscarUsuario(comboBox.getSelectedItem().toString());
 							Home.session.delete(usuarioSeleccionado);
-							Home.session.flush();
 							JOptionPane.showMessageDialog(null, "El usuario ha sido eliminado.","Usuario eliminado",JOptionPane.PLAIN_MESSAGE);
 							Home.frmAuriHispanoamericanaSa.setEnabled(true);
 							dispose();
