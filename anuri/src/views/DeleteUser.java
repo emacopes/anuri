@@ -115,5 +115,4 @@ public class DeleteUser extends JDialog {
 			contentPanel.add(btnEliminar);
 		}
 	}
-
 }
