@@ -66,7 +66,6 @@ public class User implements java.io.Serializable {
 		if (this.permisos.contains(permiso)){
 			this.permisos.remove(permiso);
 		}
-		
 	}
-
+	
 }

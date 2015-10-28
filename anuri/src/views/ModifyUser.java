@@ -29,7 +29,10 @@ import query.PermisoQuery;
 import query.UserQuery;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.awt.event.ActionEvent;
@@ -102,12 +105,17 @@ public class ModifyUser extends JDialog {
 		UserQuery userQ=new UserQuery();
 		List<User> otrosUsuarios=userQ.buscarOtrosUsuarios(Home.usuarioLogueado.getNombre());
 		if (otrosUsuarios!=null){
-			for (User u:otrosUsuarios){
-				comboBox.addItem(u.getNombre());
+			List<String>nombres=new ArrayList<String>();
+			for (User usuario:otrosUsuarios){
+				nombres.add(usuario.getNombre());
+			}
+			Collections.sort(nombres);
+			for (String nombre:nombres){
+				comboBox.addItem(nombre);
 			}
 		}
 		else JOptionPane.showMessageDialog(null, "No existen usuarios para modificar.","Error",JOptionPane.PLAIN_MESSAGE);
-		
+
 		contentPanel.add(comboBox);
 		
 		JPanel panel = new JPanel();
@@ -210,7 +218,16 @@ public class ModifyUser extends JDialog {
 		checkBox_11.setBounds(285, 311, 268, 23);
 		panel.add(checkBox_11);
 		
-		JButton button_1 = new JButton("Cancelar");
+		final JButton button_1 = new JButton("Cancelar");
+		button_1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if (key == KeyEvent.VK_ENTER) {
+					button_1.doClick();
+				}
+			}
+		});
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Home.frmAuriHispanoamericanaSa.setEnabled(true);
@@ -222,7 +239,16 @@ public class ModifyUser extends JDialog {
 		button_1.setFont(new Font("Century", Font.PLAIN, 16));
 		button_1.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 
-		JButton button = new JButton("Guardar");
+		final JButton button = new JButton("Guardar");
+		button.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				if (key == KeyEvent.VK_ENTER) {
+					button.doClick();
+				}
+			}
+		});
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (comboBox.getSelectedItem().toString().equals("Seleccione un usuario...")){

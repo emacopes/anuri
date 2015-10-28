@@ -19,6 +19,8 @@ import query.UserQuery;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
@@ -68,8 +70,13 @@ public class DeleteUser extends JDialog {
 			UserQuery userQ=new UserQuery();
 			List<User> otrosUsuarios=userQ.buscarOtrosUsuarios(Home.usuarioLogueado.getNombre());
 			if (otrosUsuarios!=null){
-				for (User u:otrosUsuarios){
-					comboBox.addItem(u.getNombre());
+				List<String>nombres=new ArrayList<String>();
+				for (User usuario:otrosUsuarios){
+					nombres.add(usuario.getNombre());
+				}
+				Collections.sort(nombres);
+				for (String nombre:nombres){
+					comboBox.addItem(nombre);
 				}
 			}
 			else JOptionPane.showMessageDialog(null, "No existen usuarios para eliminar.","Error",JOptionPane.PLAIN_MESSAGE);
